@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { Route, Routes } from "react-router-dom";
 import './App.css';
 import Form from './components/Form';
+import AddressBook from './components/AddressBook';
 
 function App() {
 
@@ -22,7 +24,10 @@ function App() {
 
   return (
     <div className="App">
-      <Form onSubmit={formSubmitHandler}/>
+      <Routes>
+        <Route path="/" element={<Form onSubmit={formSubmitHandler}/>} />
+        <Route path="/address-book" element={<AddressBook addresses={addressBook} />} />
+      </Routes>
     </div>
   );
 }
