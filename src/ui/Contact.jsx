@@ -14,7 +14,7 @@ function Contact({address}) {
 
     return (
         <li>
-            <p className="contactLeft">{initials}</p>
+            <p className="contactLeft" aria-hidden>{initials}</p>
             <div className="contactRight">
                 <p>{address.name}</p>
                 <p>{address.email}</p>
