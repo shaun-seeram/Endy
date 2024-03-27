@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import FormField from "../ui/FormField";
+import AddressAutocomplete from "./AddressAutocomplete";
 
 const EMAIL_ARRAY = ["hotmail.com", "yahoo.com", "gmail.com", "outlook.com", "hotmail.ca", "hotmail.co.uk", "hotmail.fr", "live.com", "yahoo.fr", "yahoo.co.uk", "aol.com", "msn.com", "googlemail.com"];
 
-function Form({onSubmit}) {
+function Form({addContact}) {
 
     const [formData, setFormData] = useState({
         name: "",
         email: "",
         address: ""
     });
-
     const [autocompleteAddress, setAutocompleteAddress] = useState([]);
     const [userTyping, setUserTyping] = useState(false);
 
@@ -56,7 +56,7 @@ function Form({onSubmit}) {
     }
 
     const formSubmitHandler = (e) => {
-        onSubmit(e)
+        addContact(e)
         setFormData({
             name: "",
             email: "",
@@ -66,25 +66,15 @@ function Form({onSubmit}) {
 
     return (
         <form onSubmit={formSubmitHandler}>
-            <FormField id="name" label="Name" type="text" value={formData.name} onChangeHandler={setFormData} />
-            <FormField id="email" label="Email" type="email" value={formData.email} onChangeHandler={setFormData} />
+            <FormField id="name" label="Name" type="text" value={formData.name} setFormData={setFormData} required />
+            <FormField id="email" label="Email" type="email" value={formData.email} setFormData={setFormData} required />
             {emailBool && (
                 <div className="emailAutocomplete">
                     {filterEmailArray().map((provider) => <button key={provider} onClick={(e) => appendProvider(e, provider)}>{provider}</button>)}
                 </div>
             )}
-            <FormField id="address" label="Address" type="address" value={formData.address} onChangeHandler={setFormData} onUserTyping={setUserTyping} />
-            {addressBool && (
-                <ul className="addressAutocomplete">
-                    {autocompleteAddress.map((address) => {
-                        return (
-                            <li key={address.properties.formatted}>
-                                <button onClick={(e) => selectAddress(e, address.properties.formatted)}>{address.properties.formatted}</button>
-                            </li>
-                        )
-                    })}
-                </ul>
-            )}
+            <FormField id="address" label="Address" type="address" value={formData.address} setFormData={setFormData} setUserTyping={setUserTyping} />
+            {addressBool && <AddressAutocomplete addressList={autocompleteAddress} selectAddress={selectAddress} />}
             <div className="formOptions">
                 <button className="button">Add to Contacts</button>
             </div>

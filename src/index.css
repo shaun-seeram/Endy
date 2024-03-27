@@ -14,10 +14,21 @@ html {
 
 body {
   font-size: 1.4rem;
+  font-family: "Helvetica", sans-serif;
+}
+
+button {
+  border: none;
+  background-color: unset;
+}
+
+ul, ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .button {
-  border: none;
   text-decoration: unset;
   color: #FFF;
   display: flex;
@@ -36,13 +47,16 @@ body {
   border: 2px solid black;
 }
 
+/* App */
+
 .App {
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
   height: 100vh;
-  font-family: "Helvetica", sans-serif;
 }
+
+/* Header */
 
 header {
   margin-bottom: 20px;
@@ -65,77 +79,46 @@ header h1 {
 header .headerRight {
   display: flex;
   position: absolute;
+  z-index: 2;
   top: -10px;
   right: 0;
 }
 
-header .button {
+header .headerRight .button {
   height: 87px;
   width: 77px;
 }
 
-header .button.active,
-header .button:hover,
-header .button:focus {
+header .headerRight .button.active,
+header .headerRight .button:hover,
+header .headerRight .button:focus {
   background-color: #d7347d;
   margin-top: 10px;
   border: none;
 }
 
-header svg {
+header .headerRight svg {
   padding-top: 10px;
   width: 25px;
 }
 
-@media(max-width: 522px) {
-  header {
-    padding: 20px;
-    height: 50px;
-  }
-
-  header h1 {
-    font-size: 2.5rem;
-  }
-
-  header .button {
-    height: 60px;
-    width: 50px;
-  }
-
-  header svg {
-    width: 20px;
-  }
-}
-
-@media(max-width: 396px) {
-  header h1 {
-    font-size: 1.75rem;
-  }
-}
+/* Content Container */
 
 .content {
   height: calc(100vh - 97px);
   overflow-y: scroll;
-}
-
-@media(max-width: 522px) {
-  .content {
-    height: calc(100vh - 70px);
-  }
-}
-
-form {
   padding: 0 20px;
 }
 
+/* Form */
+
 form .formFieldContainer {
-  display: flex;
-  flex-direction: column;
   margin-bottom: 20px;
 }
 
 form input {
   height: 48px;
+  width: 100%;
   padding: 0 20px;
   border: 1px solid #243746;
   border-radius: 2px;
@@ -143,27 +126,62 @@ form input {
 
 form input::placeholder {
   text-transform: uppercase;
-  font-size: 1.3rem;
-  color: #65737d;
+  font-size: 1.4rem;
+  color: #333333;
 }
 
-form .formOptions {
+.emailAutocomplete {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-end;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+}
+
+.addressAutocomplete {
+  margin-bottom: 20px;
+}
+
+.emailAutocomplete button {
+  position: relative;
+  padding: 10px;
+}
+
+.addressAutocomplete button {
+  position: relative;
+  width: 100%;
+  text-align: left;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.emailAutocomplete button:after,
+.addressAutocomplete button:after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 3px;
+  left: 0;
+  bottom: -3px;
+  background-color: #c50058;
+}
+
+.emailAutocomplete button:hover,
+.emailAutocomplete button:focus {
+  outline: 3px solid #c50058;
+}
+
+.addressAutocomplete button:hover,
+.addressAutocomplete button:focus {
+  background-color: #c50058;
+  color: #FFF;
 }
 
 form .formOptions .button {
   padding: 10px 15px;
   border-radius: 42px;
+  margin-left: auto;
 }
 
-.addresses {
-  list-style-type: none;
-  padding: 0 20px;
-  margin: 0;
-}
+/* Address Book */
 
 .addresses li {
   display: flex;
@@ -171,7 +189,8 @@ form .formOptions .button {
   margin-bottom: 15px;
   background-color: #f6f6f4;
   padding: 10px;
-  border-top-right-radius: 5px;
+  padding-right: 30px;
+  border-radius: 5px;
   overflow-x: scroll;
   position: relative;
 }
@@ -187,51 +206,15 @@ form .formOptions .button {
   justify-content: center;
   align-items: center;
   margin: 0 20px 0 0;
+  width: 65px;
   min-width: 65px;
   border-radius: 100%;
   aspect-ratio: 1/1;
 }
 
-@media(max-width: 400px) {
-  .addresses .contactLeft {
-    font-size: 1.5rem;
-    margin: 0 10px 0 0;
-    min-width: 40px;
-    border-radius: unset;
-  }
-}
-
 .addresses .contactRight p {
   margin: 0;
-}
-
-.emailAutocomplete {
-  display: flex;
-  justify-content: space-evenly;
-  margin-bottom: 20px;
-}
-
-.emailAutocomplete button {
-  border: none;
-  background-color: unset;
-  position: relative;
-  padding: 10px;
-}
-
-.emailAutocomplete button:after {
-  position: absolute;
-  content: "";
-  width: 100%;
-  height: 3px;
-  left: 0;
-  bottom: -3px;
-  background-color: #c50058;
-}
-
-.emailAutocomplete button:hover,
-.emailAutocomplete button:focus {
-  border: unset;
-  outline: 3px solid #c50058;
+  line-height: 1.5;
 }
 
 .removeButton {
@@ -244,18 +227,44 @@ form .formOptions .button {
   font-family: "Mukta", sans-serif;
 }
 
-.addressAutocomplete {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  margin-bottom: 20px;
+/* Media Queries */
+
+@media(max-width: 522px) {
+  header {
+    padding: 20px;
+    height: 50px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+  }
+
+  header .headerRight .button {
+    height: 60px;
+    width: 50px;
+  }
+
+  header .headerRight svg {
+    width: 20px;
+  }
+
+  .content {
+    height: calc(100vh - 70px);
+  }
 }
 
-.addressAutocomplete button {
-  width: 100%;
-  text-align: left;
-  padding: 10px;
-  background-color: unset;
-  border: unset;
-  border-bottom: 3px solid orange;
+@media(max-width: 400px) {
+  .addresses .contactLeft {
+    font-size: 1.5rem;
+    margin: 0 10px 0 0;
+    min-width: 40px;
+    width: 40px;
+    border-radius: unset;
+  }
+}
+
+@media(max-width: 396px) {
+  header h1 {
+    font-size: 1.75rem;
+  }
 }

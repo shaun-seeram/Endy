@@ -1,10 +1,10 @@
-function FormField({id, label, type, value, onChangeHandler, onUserTyping}) {
+function FormField({id, label, type, value, setFormData, setUserTyping, required}) {
 
     const onChange = (e) => {
         if (type === "address") {
-            onUserTyping(true)
+            setUserTyping(true)
         }
-        onChangeHandler(prevValue => {
+        setFormData(prevValue => {
             return {
                 ...prevValue,
                 [id]: e.target.value
@@ -16,7 +16,7 @@ function FormField({id, label, type, value, onChangeHandler, onUserTyping}) {
         <>
             <div className="formFieldContainer">
                 <label htmlFor={id} className="sr-only">{label}</label>
-                <input name={id} id={id} type={type} value={value} onChange={onChange} placeholder={label} required></input>
+                <input name={id} id={id} type={type} value={value} onChange={onChange} placeholder={label} required={required}></input>
             </div>
         </>
     )
