@@ -1,10 +1,14 @@
-function AddressBook({addresses}) {
+import Contact from "../ui/Contact"
+
+function AddressBook({ addresses }) {
     return (
-        addresses.map((address) => {
-            return (
-                <p id={address.id} key={address.id}>{address.name}'s email is {address.email}</p>
-            )
-        })
+        <ul className="addresses">
+            {addresses.map((address) => {
+                return (
+                    <Contact key={address.id} address={address} />
+                )
+            })}
+        </ul>
     )
 }
 

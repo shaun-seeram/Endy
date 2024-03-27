@@ -11,9 +11,9 @@ function FormField({containerName, id, label, type, value, onChangeHandler}) {
 
     return (
         <>
-            <div className={containerName}>
-                <label htmlFor={id}>{label}</label>
-                <input name={id} id={id} type={type} value={value} onChange={onChange} required></input>
+            <div className="formFieldContainer">
+                <label htmlFor={id} className="sr-only">{label}</label>
+                <input name={id} id={id} type={type} value={value} onChange={onChange} placeholder={label} required></input>
             </div>
         </>
     )

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Route, Routes } from "react-router-dom";
-import './App.css';
 import Form from './components/Form';
 import AddressBook from './components/AddressBook';
+import Header from './components/Header';
 
 function App() {
 
@@ -15,8 +15,8 @@ function App() {
 
     setAddressBook((prevAddressBook) => {
       return [...prevAddressBook, {
-        name: formData.get("name"),
-        email: formData.get("email"),
+        name: formData.get("name").trim(),
+        email: formData.get("email").trim(),
         id: new Date().getTime()
       }]
     })
@@ -24,10 +24,13 @@ function App() {
 
   return (
     <div className="App">
-      <Routes>
-        <Route path="/" element={<Form onSubmit={formSubmitHandler}/>} />
-        <Route path="/address-book" element={<AddressBook addresses={addressBook} />} />
-      </Routes>
+      <Header />
+      <div className='content'>
+        <Routes>
+          <Route path="/" element={<Form onSubmit={formSubmitHandler}/>} />
+          <Route path="/address-book" element={<AddressBook addresses={addressBook} />} />
+        </Routes>
+      </div>
     </div>
   );
 }
