@@ -13,7 +13,7 @@ html {
 }
 
 body {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
 }
 
 .button {
@@ -32,7 +32,7 @@ body {
 }
 
 .App {
-  width: 90%;
+  width: 100%;
   max-width: 1000px;
   margin: 0 auto;
   height: 100vh;
@@ -40,13 +40,14 @@ body {
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin-bottom: 20px;
+
+  position: relative;
 }
 
 header h1 {
+  display: flex;
+  align-items: center;
   font-family: "Mukta", sans-serif;
   font-weight: 600;
   font-style: normal;
@@ -55,24 +56,62 @@ header h1 {
   padding: 20px;
   margin: 0;
   height: 77px;
+  width: max-content;
 }
 
 header .headerRight {
   display: flex;
+  position: absolute;
+  top: -10px;
+  right: 0;
 }
 
 header .button {
-  height: 77px;
+  height: 87px;
   width: 77px;
 }
 
+header .button:hover {
+  margin-top: 10px;
+}
+
 header svg {
+  padding-top: 10px;
   width: 25px;
+}
+
+@media(max-width: 522px) {
+  header h1 {
+    padding: 10px 20px;
+    font-size: 2.5rem;
+    height: 50px;
+  }
+
+  header .button {
+    height: 60px;
+    width: 50px;
+  }
+
+  header svg {
+    width: 20px;
+  }
+}
+
+@media(max-width: 396px) {
+  header h1 {
+    font-size: 1.75rem;
+  }
 }
 
 .content {
   height: calc(100vh - 97px);
   overflow-y: scroll;
+}
+
+@media(max-width: 522px) {
+  .content {
+    height: calc(100vh - 50px);
+  }
 }
 
 form {
@@ -137,7 +176,7 @@ form .formOptions .button {
   justify-content: center;
   align-items: center;
   margin: 0 20px 0 0;
-  width: 65px;
+  min-width: 65px;
   border-radius: 100%;
   aspect-ratio: 1/1;
 }

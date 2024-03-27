@@ -9,7 +9,7 @@ function Contact({address}) {
     initialsArr.splice(1, address.name.split(" ").length - 2)
 
     initialsArr.forEach((letter) => {
-        initials += letter
+        initials += letter.toUpperCase()
     })
 
     return (
