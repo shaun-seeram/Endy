@@ -1,7 +1,10 @@
-function FormField({containerName, id, label, type, value, onChangeHandler}) {
+function FormField({id, label, type, value, onChangeHandler, onUserTyping}) {
 
     const onChange = (e) => {
-        onChangeHandler((prevValue) => {
+        if (type === "address") {
+            onUserTyping(true)
+        }
+        onChangeHandler(prevValue => {
             return {
                 ...prevValue,
                 [id]: e.target.value

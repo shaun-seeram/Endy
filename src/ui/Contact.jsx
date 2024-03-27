@@ -1,16 +1,8 @@
-function Contact({address}) {
+function Contact({address, removeContact}) {
 
-    let initials = "";
-
-    const initialsArr = address.name.split(" ").map((name) => {
-        return name.split("")[0]
-    })
-
-    initialsArr.splice(1, address.name.split(" ").length - 2)
-
-    initialsArr.forEach((letter) => {
-        initials += letter.toUpperCase()
-    })
+    const initialsArr = address.name.toUpperCase().split(" ").map(name => name.split("")[0]);
+    initialsArr.splice(1, address.name.split(" ").length - 2);
+    const initials = initialsArr.join("");
 
     return (
         <li>
@@ -18,7 +10,9 @@ function Contact({address}) {
             <div className="contactRight">
                 <p>{address.name}</p>
                 <p>{address.email}</p>
+                <p>{address.address}</p>
             </div>
+            <button className="removeButton" onClick={() => removeContact(address.id)}>X</button>
         </li>
     )
 }

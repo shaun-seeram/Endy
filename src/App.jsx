@@ -4,22 +4,42 @@ import Form from './components/Form';
 import AddressBook from './components/AddressBook';
 import Header from './components/Header';
 
+const ls = JSON.parse(localStorage.getItem("addresses")) || [{
+  name: "Shaun Seeram",
+  email: "shaunseeram@hotmail.com",
+  address: "123 Something Street",
+  id: 0
+}];
+
 function App() {
 
-  const [addressBook, setAddressBook] = useState([]);
+  const [addressBook, setAddressBook] = useState(ls);
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
-
     const formData = new FormData(e.target);
 
     setAddressBook((prevAddressBook) => {
-      return [...prevAddressBook, {
+      const returnValue = [...prevAddressBook, {
         name: formData.get("name").trim(),
         email: formData.get("email").trim(),
+        address: formData.get("address").trim(),
         id: new Date().getTime()
-      }]
+      }];
+
+      localStorage.setItem("addresses", JSON.stringify(returnValue));
+      return returnValue;
     })
+  }
+
+  const removeContact = (id) => {
+    if (id === 0) { return };
+
+    setAddressBook((prevAddressBook) => {
+      const filteredAddressBook = prevAddressBook.filter(address => address.id !== id);
+      localStorage.setItem("addresses", JSON.stringify(filteredAddressBook));
+      return filteredAddressBook;
+    });
   }
 
   return (
@@ -28,7 +48,7 @@ function App() {
       <div className='content'>
         <Routes>
           <Route path="/" element={<Form onSubmit={formSubmitHandler}/>} />
-          <Route path="/address-book" element={<AddressBook addresses={addressBook} />} />
+          <Route path="/address-book" element={<AddressBook addresses={addressBook} removeContact={removeContact} />} />
         </Routes>
       </div>
     </div>

@@ -74,9 +74,12 @@ header .button {
   width: 77px;
 }
 
+header .button.active,
 header .button:hover,
 header .button:focus {
+  background-color: #d7347d;
   margin-top: 10px;
+  border: none;
 }
 
 header svg {
@@ -131,8 +134,7 @@ form .formFieldContainer {
   margin-bottom: 20px;
 }
 
-form input[type="text"],
-form input[type="email"] {
+form input {
   height: 48px;
   padding: 0 20px;
   border: 1px solid #243746;
@@ -171,6 +173,7 @@ form .formOptions .button {
   padding: 10px;
   border-top-right-radius: 5px;
   overflow-x: scroll;
+  position: relative;
 }
 
 .addresses .contactLeft {
@@ -200,4 +203,59 @@ form .formOptions .button {
 
 .addresses .contactRight p {
   margin: 0;
+}
+
+.emailAutocomplete {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+}
+
+.emailAutocomplete button {
+  border: none;
+  background-color: unset;
+  position: relative;
+  padding: 10px;
+}
+
+.emailAutocomplete button:after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 3px;
+  left: 0;
+  bottom: -3px;
+  background-color: #c50058;
+}
+
+.emailAutocomplete button:hover,
+.emailAutocomplete button:focus {
+  border: unset;
+  outline: 3px solid #c50058;
+}
+
+.removeButton {
+  position: absolute;
+  padding: 5px 10px;
+  top: 5px;
+  right: 5px;
+  background-color: transparent;
+  border: none;
+  font-family: "Mukta", sans-serif;
+}
+
+.addressAutocomplete {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.addressAutocomplete button {
+  width: 100%;
+  text-align: left;
+  padding: 10px;
+  background-color: unset;
+  border: unset;
+  border-bottom: 3px solid orange;
 }
