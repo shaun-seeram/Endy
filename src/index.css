@@ -15,6 +15,7 @@ html {
 body {
   font-size: 1.4rem;
   font-family: "Helvetica", sans-serif;
+  background-color: #243746;
 }
 
 button {
@@ -54,6 +55,7 @@ ul, ol {
   max-width: 1000px;
   margin: 0 auto;
   height: 100vh;
+  background-color: #FFF;
 }
 
 /* Header */
@@ -128,6 +130,7 @@ form input::placeholder {
   text-transform: uppercase;
   font-size: 1.4rem;
   color: #333333;
+  opacity: 0.6;
 }
 
 .emailAutocomplete {

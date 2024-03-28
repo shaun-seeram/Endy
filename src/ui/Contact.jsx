@@ -1,4 +1,9 @@
-function Contact({address, removeContact}) {
+import { useContext } from "react";
+import { AddressBookContext } from "../store/AddressBookContext";
+
+function Contact({address}) {
+
+    const addressBookCtx = useContext(AddressBookContext)
 
     const initialsArr = address.name.toUpperCase().split(" ").map(name => name.split("")[0]);
     initialsArr.splice(1, address.name.split(" ").length - 2);
@@ -12,7 +17,7 @@ function Contact({address, removeContact}) {
                 <p>{address.email}</p>
                 <p>{address.address}</p>
             </div>
-            <button className="removeButton" onClick={() => removeContact(address.id)}>X</button>
+            <button className="removeButton" aria-label="Delete contact" onClick={() => addressBookCtx.removeFromAddressBook(address.id)}>X</button>
         </li>
     )
 }

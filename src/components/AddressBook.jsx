@@ -1,8 +1,12 @@
+import { useContext } from "react";
 import Contact from "../ui/Contact"
+import { AddressBookContext } from "../store/AddressBookContext";
 
-function AddressBook({ addresses, removeContact }) {
+function AddressBook() {
 
-    const addressClone = [...addresses];
+    const addressBookCtx = useContext(AddressBookContext)
+
+    const addressClone = [...addressBookCtx.addressBook];
     addressClone.sort((a, b) => {
         if (a.name.toUpperCase() > b.name.toUpperCase()) {
             return 1;
@@ -15,7 +19,7 @@ function AddressBook({ addresses, removeContact }) {
 
     return (
         <ul className="addresses">
-            {addressClone.map(address => <Contact key={address.id} address={address} removeContact={removeContact} />)}
+            {addressClone.map(address => <Contact key={address.id} address={address} />)}
         </ul>
     )
 }
