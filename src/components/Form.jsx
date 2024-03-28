@@ -1,16 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import FormField from "../ui/FormField";
 import AddressAutocomplete from "./AddressAutocomplete";
-import { AddressBookContext } from "../store/AddressBookContext";
 import { FormContext } from "../store/FormContext";
+import EmailAutocomplete from "./EmailAutocomplete";
 
 const EMAIL_ARRAY = ["hotmail.com", "yahoo.com", "gmail.com", "outlook.com", "hotmail.ca", "hotmail.co.uk", "hotmail.fr", "live.com", "yahoo.fr", "yahoo.co.uk", "aol.com", "msn.com", "googlemail.com"];
 
 function Form() {
 
-    const addressBookCtx = useContext(AddressBookContext);
     const formCtx = useContext(FormContext)
-
     const [autocompleteAddress, setAutocompleteAddress] = useState([]);
     const [userTyping, setUserTyping] = useState(false);
 
@@ -24,24 +22,11 @@ function Form() {
                 .then(result => setAutocompleteAddress(result.features))
                 .catch(error => console.log('error', error));
         }
-    }, [addressBool, formCtx])
+    }, [addressBool, formCtx.address])
 
     const filterEmailArray = () => {
         const provider = formCtx.email.split("@").reverse()[0];
         return EMAIL_ARRAY.filter(email => email.startsWith(provider)).splice(0, 4)
-    }
-
-    const appendProvider = (e, provider) => {
-        e.preventDefault();
-        formCtx.setFormData((prevFormData) => {
-            let formatEmail = prevFormData.email.split("@")
-            formatEmail.pop();
-
-            return {
-                ...prevFormData,
-                email: formatEmail.join("") + "@" + provider
-            }
-        })
     }
 
     const selectAddress = (e, address) => {
@@ -55,24 +40,11 @@ function Form() {
         setUserTyping(false)
     }
 
-    const formSubmitHandler = (e) => {
-        addressBookCtx.addToAddressBook(e);
-        formCtx.setFormData({
-            name: "",
-            email: "",
-            address: ""
-        })
-    }
-
     return (
-        <form onSubmit={formSubmitHandler}>
+        <form onSubmit={formCtx.submitFormData}>
             <FormField id="name" label="Name" type="text" required />
             <FormField id="email" label="Email" type="email" required />
-            {emailBool && (
-                <div className="emailAutocomplete">
-                    {filterEmailArray().map((provider) => <button key={provider} onClick={(e) => appendProvider(e, provider)}>{provider}</button>)}
-                </div>
-            )}
+            {emailBool && <EmailAutocomplete filterEmailArray={filterEmailArray} appendProvider={formCtx.appendProvider} />}
             <FormField id="address" label="Address" type="address" setUserTyping={setUserTyping} />
             {addressBool && <AddressAutocomplete addressList={autocompleteAddress} selectAddress={selectAddress} />}
             <div className="formOptions">

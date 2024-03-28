@@ -1,13 +1,18 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
+import { AddressBookContext } from "./AddressBookContext";
 
 export const FormContext = createContext({
     name: "",
     email: "",
     address: "",
-    setFormData: () => {}
+    setFormData: () => {},
+    appendProvider: (e, provider) => {},
+    submitFormData: () => {}
 })
 
 export default function FormContextProvider({children}) {
+
+    const addressBookCtx = useContext(AddressBookContext)
 
     const [formData, setFormData] = useState({
         name: "",
@@ -15,12 +20,36 @@ export default function FormContextProvider({children}) {
         address: ""
     });
 
+    const appendProvider = (e, provider) => {
+        e.preventDefault();
+        setFormData((prevFormData) => {
+            let formatEmail = prevFormData.email.split("@")
+            formatEmail.pop();
+
+            return {
+                ...prevFormData,
+                email: formatEmail.join("") + "@" + provider
+            }
+        })
+    }
+
+    const submitFormData = (e) => {
+        addressBookCtx.addToAddressBook(e);
+        setFormData({
+            name: "",
+            email: "",
+            address: ""
+        })
+    }
+
     return (
         <FormContext.Provider value={{
             name: formData.name,
             email: formData.email,
             address: formData.address,
-            setFormData
+            setFormData,
+            appendProvider,
+            submitFormData
         }}>
             {children}
         </FormContext.Provider>
