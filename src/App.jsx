@@ -7,6 +7,9 @@ import FormContextProvider from "./store/FormContext";
 
 function App() {
 
+  // Browser router to navigate between the two pages
+  // Providers for Main page (Form) and Address Book to keep as much logic in its own file
+
   return (
     <BrowserRouter>
       <AddressBookContextProvider>

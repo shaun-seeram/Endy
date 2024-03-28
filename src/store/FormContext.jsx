@@ -7,7 +7,7 @@ export const FormContext = createContext({
     address: "",
     setFormData: () => {},
     appendProvider: (e, provider) => {},
-    submitFormData: () => {}
+    submitFormData: (e) => {}
 })
 
 // Managing form states
@@ -23,6 +23,8 @@ export default function FormContextProvider({children}) {
 
     const appendProvider = (e, provider) => {
         e.preventDefault();
+
+        // Splitting unfinished email at the @ and deleting the second half. Replacing with the appended provider in the return
         setFormData((prevFormData) => {
             let formatEmail = prevFormData.email.split("@")
             formatEmail.pop();
@@ -34,6 +36,7 @@ export default function FormContextProvider({children}) {
         })
     }
 
+    // Submit and clear form
     const submitFormData = (e) => {
         addressBookCtx.addToAddressBook(e);
         setFormData({

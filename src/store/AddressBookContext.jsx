@@ -37,7 +37,9 @@ export default function AddressBookContextProvider({ children }) {
     }
 
     const removeFromAddressBook = (id) => {
+        // Return if attempting to remove MY contact information ;)
         if (id === 0) { return };
+
         setAddressBook((prevAddressBook) => {
             const filteredAddressBook = prevAddressBook.filter(address => address.id !== id);
             localStorage.setItem("addresses", JSON.stringify(filteredAddressBook));

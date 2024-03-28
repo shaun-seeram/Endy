@@ -5,6 +5,7 @@ function FormField({id, label, type, setUserTyping, required}) {
 
     const formCtx = useContext(FormContext)
 
+    // If the address field, change "userTyping" to "true" to allow the autocomplete container to show again
     const onChange = (e) => {
         if (type === "address") {
             setUserTyping(true)

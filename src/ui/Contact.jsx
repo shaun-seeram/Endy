@@ -5,6 +5,7 @@ function Contact({address}) {
 
     const addressBookCtx = useContext(AddressBookContext)
 
+    // Computing the initials for the contact box
     const initialsArr = address.name.toUpperCase().split(" ").map(name => name.split("")[0]);
     initialsArr.splice(1, address.name.split(" ").length - 2);
     const initials = initialsArr.join("");

@@ -7,9 +7,9 @@ import EmailAutocomplete from "./EmailAutocomplete";
 function Form() {
 
     const formCtx = useContext(FormContext)
-    const [userTyping, setUserTyping] = useState(false); // When false, hides the address autocomplete container
+    const [userTyping, setUserTyping] = useState(false);
 
-    // Computed values instead of state to determine when to show certain containers
+    // When false, hides their respective autocomplete containers
     const emailBool = formCtx.email.includes("@") && formCtx.email.split("@").length < 3 && !formCtx.email.split("@")[1].includes(".");
     const addressBool = formCtx.address.length >= 5 && userTyping;
 
