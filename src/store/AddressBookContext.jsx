@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 
+// Sets default value for address list
 const defaultStorageValue = JSON.parse(localStorage.getItem("addresses")) || [{
     name: "Shaun Seeram",
     email: "shaunseeram@hotmail.com",
@@ -13,7 +14,8 @@ export const AddressBookContext = createContext({
     removeFromAddressBook: () => {}
 });
 
-export default function CartContextProvider({ children }) {
+// Managing address book states
+export default function AddressBookContextProvider({ children }) {
 
     const [addressBook, setAddressBook] = useState(defaultStorageValue);
 

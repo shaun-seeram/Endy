@@ -6,6 +6,7 @@ function AddressBook() {
 
     const addressBookCtx = useContext(AddressBookContext)
 
+    // Clones (since state) and sorts addressbook in alphabetical order
     const addressClone = [...addressBookCtx.addressBook];
     addressClone.sort((a, b) => {
         if (a.name.toUpperCase() > b.name.toUpperCase()) {

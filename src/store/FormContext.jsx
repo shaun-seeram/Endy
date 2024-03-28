@@ -10,6 +10,7 @@ export const FormContext = createContext({
     submitFormData: () => {}
 })
 
+// Managing form states
 export default function FormContextProvider({children}) {
 
     const addressBookCtx = useContext(AddressBookContext)
